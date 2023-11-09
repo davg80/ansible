@@ -47,14 +47,14 @@
 
     - name: Clone prevention repository
       git:
-        repo: https://gitlab.com/0fflineuser/tp_docker.git
+        repo: https://github.com/davg80/prevention.git
         dest: /var/www/html/prevention
         clone: yes
         update: yes
 
-    # - name: Run `docker-compose up` again
-    #   community.docker.docker_compose:
-    #     project_src: var/www/html/prevention
-    #     build: true 
-    #     state: present
-    #   register: output
+    - name: Make sure compose service is up
+      docker_compose:
+        project_src: /var/www/html/prevention
+        files:
+          - "docker-compose.yml"
+        state: present
